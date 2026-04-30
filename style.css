@@ -19,9 +19,11 @@
 body {
     font-family: 'Helvetica Neue', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
     margin: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -36,6 +38,68 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
     position: relative;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+.contact-section {
+    margin-top: 40px;
+}
+
+.contact-section h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.dark-mode .form-group input, 
+.dark-mode .form-group textarea {
+    border-color: #444;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--button-bg);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--button-bg);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: var(--button-hover);
 }
 
 .theme-toggle {

@@ -30,7 +30,8 @@ document.getElementById('generate-btn').addEventListener('click', () => {
     while (numbers.size < 6) {
         numbers.add(Math.floor(Math.random() * 45) + 1);
     }
-    numbers.forEach(number => {
+    const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+    sortedNumbers.forEach(number => {
         const numberDiv = document.createElement('div');
         numberDiv.className = 'number';
         numberDiv.textContent = number;

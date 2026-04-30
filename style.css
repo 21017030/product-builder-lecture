@@ -98,13 +98,40 @@ body {
     transition: background-color 0.3s;
 }
 
-#webcam-container {
-    margin: 20px auto;
-    border-radius: 15px;
-    overflow: hidden;
-    width: 200px;
-    height: 200px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.upload-section {
+    margin: 20px 0;
+}
+
+#image-upload {
+    display: none;
+}
+
+.upload-label {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--button-bg);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.upload-label:hover {
+    background-color: var(--button-hover);
+}
+
+#image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#face-image {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+    border: 3px solid var(--button-bg);
 }
 
 #label-container {

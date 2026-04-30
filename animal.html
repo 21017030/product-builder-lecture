@@ -17,8 +17,13 @@
             <button id="theme-btn">Dark Mode</button>
         </div>
         <h2>동물상 테스트 (강아지 vs 고양이)</h2>
-        <button type="button" id="start-btn" onclick="init()">테스트 시작하기</button>
-        <div id="webcam-container"></div>
+        <div class="upload-section">
+            <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)">
+            <label for="image-upload" class="upload-label">이미지 업로드</label>
+        </div>
+        <div id="image-container">
+            <img id="face-image" src="" alt="업로드된 이미지" style="display: none; max-width: 100%; border-radius: 15px; margin-top: 20px;">
+        </div>
         <div id="label-container"></div>
     </div>
 
@@ -26,43 +31,48 @@
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
         const URL = "https://teachablemachine.withgoogle.com/models/ivBq2iSmE/";
-        let model, webcam, labelContainer, maxPredictions;
+        let model, labelContainer, maxPredictions;
 
-        async function init() {
+        // Load the model initially
+        async function loadModel() {
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
-            
-            document.getElementById('start-btn').style.display = 'none';
-
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
-
-            const flip = true; 
-            webcam = new tmImage.Webcam(200, 200, flip); 
-            await webcam.setup(); 
-            await webcam.play();
-            window.requestAnimationFrame(loop);
-
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
+            
             labelContainer = document.getElementById("label-container");
             for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement("div"));
+                const bar = document.createElement("div");
+                bar.className = 'prediction-bar';
+                labelContainer.appendChild(bar);
+            }
+        }
+        loadModel();
+
+        async function handleImageUpload(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const imgElement = document.getElementById('face-image');
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                    
+                    // Wait for image to load before predicting
+                    imgElement.onload = async function() {
+                        await predict(imgElement);
+                    };
+                };
+                reader.readAsDataURL(input.files[0]);
             }
         }
 
-        async function loop() {
-            webcam.update();
-            await predict();
-            window.requestAnimationFrame(loop);
-        }
-
-        async function predict() {
-            const prediction = await model.predict(webcam.canvas);
+        async function predict(imgElement) {
+            const prediction = await model.predict(imgElement);
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
                 labelContainer.childNodes[i].innerHTML = classPrediction;
-                labelContainer.childNodes[i].className = 'prediction-bar';
                 labelContainer.childNodes[i].style.setProperty('--width', (prediction[i].probability * 100) + '%');
             }
         }

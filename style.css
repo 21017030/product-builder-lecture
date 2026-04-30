@@ -52,6 +52,68 @@ body {
     margin-bottom: 40px;
 }
 
+.animal-test-section {
+    margin-top: 40px;
+}
+
+#start-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--number-bg);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#webcam-container {
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#label-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.prediction-bar {
+    width: 100%;
+    max-width: 300px;
+    background: #eee;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    font-weight: bold;
+    text-align: left;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.dark-mode .prediction-bar {
+    background: #3a3b3c;
+}
+
+.prediction-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--width, 0%);
+    background: var(--button-bg);
+    opacity: 0.3;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
 .contact-section h2 {
     margin-bottom: 20px;
 }

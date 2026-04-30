@@ -1,3 +1,21 @@
+:root {
+    --bg-color: #f0f2f5;
+    --container-bg: white;
+    --text-color: #333;
+    --number-bg: #4CAF50;
+    --button-bg: #007BFF;
+    --button-hover: #0056b3;
+}
+
+.dark-mode {
+    --bg-color: #18191a;
+    --container-bg: #242526;
+    --text-color: #e4e6eb;
+    --number-bg: #2e7d32;
+    --button-bg: #3a3b3c;
+    --button-hover: #4e4f50;
+}
+
 body {
     font-family: 'Helvetica Neue', sans-serif;
     display: flex;
@@ -5,20 +23,40 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f2f5;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
     text-align: center;
-    background-color: white;
+    background-color: var(--container-bg);
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+#theme-btn {
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 h1 {
     margin-bottom: 30px;
-    color: #333;
+    color: var(--text-color);
 }
 
 .numbers-container {
@@ -35,7 +73,7 @@ h1 {
     height: 50px;
     margin: 0 5px;
     border-radius: 50%;
-    background-color: #4CAF50;
+    background-color: var(--number-bg);
     color: white;
     font-size: 24px;
     font-weight: bold;
@@ -45,7 +83,7 @@ h1 {
     padding: 15px 30px;
     border: none;
     border-radius: 10px;
-    background-color: #007BFF;
+    background-color: var(--button-bg);
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -53,5 +91,5 @@ h1 {
 }
 
 #generate-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover);
 }
